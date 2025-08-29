@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Portfolio - Your Guide in the Digital Jungle</title>
+<style>
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #121214;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#particles-js {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.loader {
+  position: relative;
+  z-index: 1;
+  width: 120px;
+  height: 120px;
+  border: 4px solid transparent;
+  border-radius: 50%;
+  background: linear-gradient(#121214, #121214) padding-box,
+              linear-gradient(135deg, #00F0FF, #FF3E00) border-box;
+  animation: rotate 2s linear infinite;
+}
+
+.loader:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  border: 4px solid transparent;
+  background: linear-gradient(#121214, #121214) padding-box,
+              linear-gradient(-135deg, #FF3E00, #00F0FF) border-box;
+  animation: rotate 3s linear infinite reverse;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+</style>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#00F0FF',
+secondary: '#FF3E00'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+}
+}
+}
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<style>
+:where([class^="ri-"])::before {
+content: "\f3c2";
+}
+body {
+font-family: 'Inter', sans-serif;
+background: #121214;
+color: #F4F4F5;
+overflow-x: hidden;
+}
+.font-space {
+font-family: 'Space Grotesk', sans-serif;
+}
+.font-mono {
+font-family: 'JetBrains Mono', monospace;
+}
+.gradient-text {
+background: linear-gradient(135deg, #00F0FF, #FF3E00);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+.neon-glow {
+box-shadow: 0 0 20px rgba(0, 240, 255, 0.3), 0 0 40px rgba(0, 240, 255, 0.1);
+}
+.neon-border {
+border: 2px solid transparent;
+background: linear-gradient(#121214, #121214) padding-box,
+linear-gradient(135deg, #00F0FF, #FF3E00) border-box;
+}
+.card-hover {
+transition: all 0.3s ease;
+}
+.card-hover:hover {
+transform: translateY(-10px);
+box-shadow: 0 20px 40px rgba(0, 240, 255, 0.2);
+}
+.hero-bg {
+background: radial-gradient(ellipse at center, rgba(0, 240, 255, 0.1) 0%, transparent 50%),
+radial-gradient(ellipse at 80% 20%, rgba(255, 62, 0, 0.1) 0%, transparent 50%);
+}
+.floating-shapes {
+position: absolute;
+width: 100%;
+height: 100%;
+overflow: hidden;
+}
+.shape {
+position: absolute;
+border: 2px solid rgba(0, 240, 255, 0.3);
+animation: float 6s ease-in-out infinite;
+}
+.shape:nth-child(1) {
+width: 100px;
+height: 100px;
+top: 20%;
+left: 10%;
+animation-delay: 0s;
+border-radius: 50%;
+}
+.shape:nth-child(2) {
+width: 60px;
+height: 60px;
+top: 60%;
+right: 15%;
+animation-delay: 2s;
+transform: rotate(45deg);
+}
+.shape:nth-child(3) {
+width: 80px;
+height: 80px;
+bottom: 30%;
+left: 20%;
+animation-delay: 4s;
+border-radius: 20px;
+}
+@keyframes float {
+0%, 100% { transform: translateY(0px) rotate(0deg); }
+50% { transform: translateY(-20px) rotate(180deg); }
+}
+.skill-circle {
+position: relative;
+width: 120px;
+height: 120px;
+}
+.skill-progress {
+transform: rotate(-90deg);
+}
+.hexagon {
+width: 100px;
+height: 87px;
+position: relative;
+margin: 43px auto;
+}
+.hexagon:before,
+.hexagon:after {
+content: "";
+position: absolute;
+width: 0;
+border-left: 50px solid transparent;
+border-right: 50px solid transparent;
+}
+.hexagon:before {
+bottom: 100%;
+border-bottom: 29px solid #1A1A1C;
+}
+.hexagon:after {
+top: 100%;
+border-top: 29px solid #1A1A1C;
+}
+.typing-animation {
+overflow: hidden;
+border-right: 2px solid #00F0FF;
+white-space: nowrap;
+animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+@keyframes typing {
+from { width: 0; }
+to { width: 100%; }
+}
+@keyframes blink-caret {
+from, to { border-color: transparent; }
+50% { border-color: #00F0FF; }
+}
+</style>
+</head>
+<body>
+<div id="preloader">
+  <div id="particles-js"></div>
+  <div class="loader"></div>
+</div>
+<header class="fixed top-0 w-full z-50 bg-black bg-opacity-95 backdrop-blur-md border-b border-gray-800">
+<nav class="flex items-center justify-between px-8 h-16">
+<div class="text-2xl font-space font-bold gradient-text">
+DigitalPro
+</div>
+<div class="hidden md:flex items-center space-x-8">
+<a href="#about" class="text-gray-300 hover:text-primary transition-colors">About</a>
+<a href="#services" class="text-gray-300 hover:text-primary transition-colors">Services</a>
+<a href="#portfolio" class="text-gray-300 hover:text-primary transition-colors">Portfolio</a>
+<a href="#skills" class="text-gray-300 hover:text-primary transition-colors">Skills</a>
+<a href="#testimonials" class="text-gray-300 hover:text-primary transition-colors">Testimonials</a>
+<a href="#blog" class="text-gray-300 hover:text-primary transition-colors">Blog</a>
+<a href="#contact" class="text-gray-300 hover:text-primary transition-colors">Contact</a>
+</div>
+<button class="bg-gradient-to-r from-primary to-secondary px-6 py-2 !rounded-button text-black font-semibold hover:scale-105 transition-transform whitespace-nowrap">
+Hire Me
+</button>
+<button class="md:hidden text-white" id="mobile-menu-btn">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-menu-line ri-lg"></i>
+</div>
+</button>
+</nav>
+<div class="md:hidden bg-black bg-opacity-95 hidden" id="mobile-menu">
+<div class="px-8 py-4 space-y-4">
+<a href="#about" class="block text-gray-300 hover:text-primary">About</a>
+<a href="#services" class="block text-gray-300 hover:text-primary">Services</a>
+<a href="#portfolio" class="block text-gray-300 hover:text-primary">Portfolio</a>
+<a href="#skills" class="block text-gray-300 hover:text-primary">Skills</a>
+<a href="#testimonials" class="block text-gray-300 hover:text-primary">Testimonials</a>
+<a href="#blog" class="block text-gray-300 hover:text-primary">Blog</a>
+<a href="#contact" class="block text-gray-300 hover:text-primary">Contact</a>
+</div>
+</div>
+</header>
+<section class="relative min-h-screen flex items-center justify-center hero-bg pt-16">
+<div class="floating-shapes">
+<div class="shape"></div>
+<div class="shape"></div>
+<div class="shape"></div>
+</div>
+<div class="container mx-auto px-8 text-center z-10">
+<h1 class="text-6xl md:text-8xl font-space font-bold mb-6">
+Your Guide in the
+<span class="gradient-text">Digital Jungle</span>
+</h1>
+<p class="text-xl md:text-2xl text-gray-300 mb-8 typing-animation max-w-3xl mx-auto">
+Crafting exceptional digital experiences through innovative design and cutting-edge technology
+</p>
+<button class="bg-gradient-to-r from-primary to-secondary px-8 py-4 !rounded-button text-black font-semibold text-lg hover:scale-105 transition-transform neon-glow whitespace-nowrap">
+Explore My Work
+</button>
+</div>
+</section>
+<section id="about" class="py-20 bg-gradient-to-b from-gray-900 to-black">
+<div class="container mx-auto px-8">
+<div class="grid md:grid-cols-2 gap-12 items-center">
+<div class="text-center">
+<div class="w-80 h-80 mx-auto mb-8 neon-border rounded-full overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=Professional%20portrait%20of%20a%20confident%20digital%20designer%20in%20modern%20workspace%2C%20clean%20minimalist%20background%2C%20soft%20lighting%2C%20contemporary%20style%2C%20high%20quality%20photography&width=320&height=320&seq=about-profile&orientation=squarish"
+alt="Profile" class="w-full h-full object-cover object-top">
+</div>
+</div>
+<div>
+<h2 class="text-5xl font-space font-bold mb-6 gradient-text">About Me</h2>
+<p class="text-lg text-gray-300 mb-6 leading-relaxed">
+I'm a passionate digital creator with over 8 years of experience in transforming ideas into stunning digital realities.
+My expertise spans across web design, development, branding, and digital marketing strategies.
+</p>
+<p class="text-lg text-gray-300 mb-8 leading-relaxed">
+I believe in the power of clean code, intuitive design, and strategic thinking to create solutions that not only look amazing but also drive real business results.
+</p>
+<div class="grid grid-cols-3 gap-6">
+<div class="text-center p-4 bg-gray-800 !rounded-button neon-border">
+<div class="text-3xl font-bold gradient-text">8+</div>
+<div class="text-sm text-gray-400">Years Experience</div>
+</div>
+<div class="text-center p-4 bg-gray-800 !rounded-button neon-border">
+<div class="text-3xl font-bold gradient-text">150+</div>
+<div class="text-sm text-gray-400">Projects Completed</div>
+</div>
+<div class="text-center p-4 bg-gray-800 !rounded-button neon-border">
+<div class="text-3xl font-bold gradient-text">50+</div>
+<div class="text-sm text-gray-400">Happy Clients</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="services" class="py-20 bg-black">
+<div class="container mx-auto px-8">
+<div class="text-center mb-16">
+<h2 class="text-5xl font-space font-bold mb-6 gradient-text">Services</h2>
+<p class="text-xl text-gray-300 max-w-2xl mx-auto">
+Comprehensive digital solutions tailored to elevate your brand and drive growth
+</p>
+</div>
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="bg-gray-900 p-8 !rounded-button neon-border card-hover group">
+<div class="w-16 h-16 flex items-center justify-center bg-gradient-to-r from-primary to-secondary !rounded-button mb-6 group-hover:scale-110 transition-transform">
+<i class="ri-code-line ri-2x text-black"></i>
+</div>
+<h3 class="text-2xl font-space font-semibold mb-4 text-white">Web Development</h3>
+<p class="text-gray-300">Custom websites and web applications built with modern technologies and best practices for optimal performance.</p>
+</div>
+<div class="bg-gray-900 p-8 !rounded-button neon-border card-hover group">
+<div class="w-16 h-16 flex items-center justify-center bg-gradient-to-r from-primary to-secondary !rounded-button mb-6 group-hover:scale-110 transition-transform">
+<i class="ri-palette-line ri-2x text-black"></i>
+</div>
+<h3 class="text-2xl font-space font-semibold mb-4 text-white">UI/UX Design</h3>
+<p class="text-gray-300">Intuitive and engaging user interfaces that provide exceptional user experiences across all devices and platforms.</p>
+</div>
+<div class="bg-gray-900 p-8 !rounded-button neon-border card-hover group">
+<div class="w-16 h-16 flex items-center justify-center bg-gradient-to-r from-primary to-secondary !rounded-button mb-6 group-hover:scale-110 transition-transform">
+<i class="ri-smartphone-line ri-2x text-black"></i>
+</div>
+<h3 class="text-2xl font-space font-semibold mb-4 text-white">Mobile Apps</h3>
+<p class="text-gray-300">Native and cross-platform mobile applications that deliver seamless experiences on iOS and Android devices.</p>
+</div>
+<div class="bg-gray-900 p-8 !rounded-button neon-border card-hover group">
+<div class="w-16 h-16 flex items-center justify-center bg-gradient-to-r from-primary to-secondary !rounded-button mb-6 group-hover:scale-110 transition-transform">
+<i class="ri-megaphone-line ri-2x text-black"></i>
+</div>
+<h3 class="text-2xl font-space font-semibold mb-4 text-white">Digital Marketing</h3>
+<p class="text-gray-300">Strategic digital marketing campaigns that increase brand visibility and drive conversions across multiple channels.</p>
+</div>
+<div class="bg-gray-900 p-8 !rounded-button neon-border card-hover group">
+<div class="w-16 h-16 flex items-center justify-center bg-gradient-to-r from-primary to-secondary !rounded-button mb-6 group-hover:scale-110 transition-transform">
+<i class="ri-paint-brush-line ri-2x text-black"></i>
+</div>
+<h3 class="text-2xl font-space font-semibold mb-4 text-white">Brand Identity</h3>
+<p class="text-gray-300">Complete brand identity solutions including logo design, brand guidelines, and visual identity systems.</p>
+</div>
+<div class="bg-gray-900 p-8 !rounded-button neon-border card-hover group">
+<div class="w-16 h-16 flex items-center justify-center bg-gradient-to-r from-primary to-secondary !rounded-button mb-6 group-hover:scale-110 transition-transform">
+<i class="ri-search-line ri-2x text-black"></i>
+</div>
+<h3 class="text-2xl font-space font-semibold mb-4 text-white">SEO Optimization</h3>
+<p class="text-gray-300">Comprehensive SEO strategies to improve search rankings and increase organic traffic to your website.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="portfolio" class="py-20 bg-gradient-to-b from-gray-900 to-black">
+<div class="container mx-auto px-8">
+<div class="text-center mb-16">
+<h2 class="text-5xl font-space font-bold mb-6 gradient-text">Portfolio</h2>
+<p class="text-xl text-gray-300 max-w-2xl mx-auto">
+A showcase of my latest projects and creative solutions
+</p>
+</div>
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="bg-gray-900 !rounded-button overflow-hidden neon-border card-hover group">
+<div class="h-48 overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=Modern%20e-commerce%20website%20interface%20design%20on%20laptop%20screen%2C%20clean%20minimalist%20layout%2C%20professional%20product%20showcase%2C%20contemporary%20digital%20design%2C%20high%20quality%20mockup&width=400&height=300&seq=portfolio-1&orientation=landscape"
+alt="E-commerce Platform" class="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-300">
+</div>
+<div class="p-6">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm font-mono text-primary">E-commerce</span>
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-arrow-right-up-line text-gray-400 group-hover:text-primary transition-colors"></i>
+</div>
+</div>
+<h3 class="text-xl font-space font-semibold mb-2">Fashion Store Platform</h3>
+<p class="text-gray-400 text-sm">Complete e-commerce solution with advanced filtering and seamless checkout experience</p>
+</div>
+</div>
+<div class="bg-gray-900 !rounded-button overflow-hidden neon-border card-hover group">
+<div class="h-48 overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=Mobile%20banking%20app%20interface%20design%20on%20smartphone%2C%20modern%20fintech%20application%2C%20clean%20user%20interface%2C%20professional%20financial%20app%20design%2C%20contemporary%20mobile%20design&width=400&height=300&seq=portfolio-2&orientation=landscape"
+alt="Banking App" class="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-300">
+</div>
+<div class="p-6">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm font-mono text-secondary">Mobile App</span>
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-arrow-right-up-line text-gray-400 group-hover:text-primary transition-colors"></i>
+</div>
+</div>
+<h3 class="text-xl font-space font-semibold mb-2">FinTech Mobile App</h3>
+<p class="text-gray-400 text-sm">Secure banking application with intuitive design and advanced security features</p>
+</div>
+</div>
+<div class="bg-gray-900 !rounded-button overflow-hidden neon-border card-hover group">
+<div class="h-48 overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=Corporate%20website%20design%20on%20desktop%20computer%2C%20professional%20business%20website%20layout%2C%20modern%20corporate%20branding%2C%20clean%20professional%20web%20design%2C%20contemporary%20business%20interface&width=400&height=300&seq=portfolio-3&orientation=landscape"
+alt="Corporate Website" class="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-300">
+</div>
+<div class="p-6">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm font-mono text-primary">Web Design</span>
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-arrow-right-up-line text-gray-400 group-hover:text-primary transition-colors"></i>
+</div>
+</div>
+<h3 class="text-xl font-space font-semibold mb-2">Corporate Website</h3>
+<p class="text-gray-400 text-sm">Professional corporate website with modern design and comprehensive business solutions</p>
+</div>
+</div>
+<div class="bg-gray-900 !rounded-button overflow-hidden neon-border card-hover group">
+<div class="h-48 overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=Brand%20identity%20design%20showcase%20with%20logo%20variations%2C%20modern%20branding%20materials%2C%20professional%20brand%20guidelines%2C%20contemporary%20graphic%20design%2C%20clean%20brand%20presentation&width=400&height=300&seq=portfolio-4&orientation=landscape"
+alt="Brand Identity" class="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-300">
+</div>
+<div class="p-6">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm font-mono text-secondary">Branding</span>
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-arrow-right-up-line text-gray-400 group-hover:text-primary transition-colors"></i>
+</div>
+</div>
+<h3 class="text-xl font-space font-semibold mb-2">Tech Startup Branding</h3>
+<p class="text-gray-400 text-sm">Complete brand identity system for innovative technology startup company</p>
+</div>
+</div>
+<div class="bg-gray-900 !rounded-button overflow-hidden neon-border card-hover group">
+<div class="h-48 overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=Social%20media%20marketing%20campaign%20design%2C%20modern%20digital%20marketing%20materials%2C%20professional%20social%20media%20graphics%2C%20contemporary%20marketing%20design%2C%20clean%20promotional%20content&width=400&height=300&seq=portfolio-5&orientation=landscape"
+alt="Marketing Campaign" class="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-300">
+</div>
+<div class="p-6">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm font-mono text-primary">Marketing</span>
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-arrow-right-up-line text-gray-400 group-hover:text-primary transition-colors"></i>
+</div>
+</div>
+<h3 class="text-xl font-space font-semibold mb-2">Digital Campaign</h3>
+<p class="text-gray-400 text-sm">Multi-channel digital marketing campaign with impressive conversion rates</p>
+</div>
+</div>
+<div class="bg-gray-900 !rounded-button overflow-hidden neon-border card-hover group">
+<div class="h-48 overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=Dashboard%20analytics%20interface%20design%2C%20modern%20data%20visualization%2C%20professional%20admin%20panel%2C%20contemporary%20web%20application%20interface%2C%20clean%20dashboard%20design&width=400&height=300&seq=portfolio-6&orientation=landscape"
+alt="Dashboard Design" class="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-300">
+</div>
+<div class="p-6">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm font-mono text-secondary">Dashboard</span>
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-arrow-right-up-line text-gray-400 group-hover:text-primary transition-colors"></i>
+</div>
+</div>
+<h3 class="text-xl font-space font-semibold mb-2">Analytics Dashboard</h3>
+<p class="text-gray-400 text-sm">Comprehensive data visualization dashboard with real-time analytics and insights</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="skills" class="py-20 bg-black">
+<div class="container mx-auto px-8">
+<div cl
